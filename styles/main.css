@@ -1,0 +1,50 @@
+#timers h3{
+    font-family: 'Offside', cursive;
+    font-weight: 100;
+}
+
+#add-step input, #add-step button, #set-timer input, #set-timer button, #stop-timer button{
+  margin-top: 6px;
+  height: 35px;
+  width: 100%;
+}
+
+#stop-timer button{
+    margin-bottom: 12px;
+}
+
+#stop-timer{
+    display: none;
+}
+
+.remove{
+    font-size: 12px;
+}
+
+#list{
+    min-height: 200px;
+}
+
+#list .header h5{
+    text-decoration: underline;
+}
+
+#list h5{
+    margin: 0;
+    padding: 0;
+    line-height: 35px;
+    text-align: center;
+}
+
+.completed{
+    background-color: rgba(200, 150, 150, 0.8);
+}
+
+.current{
+    background-color: rgba(150, 200, 150, 0.8);
+}
+
+#footer .columns{
+    line-height: 50px;
+    text-align: center;
+}

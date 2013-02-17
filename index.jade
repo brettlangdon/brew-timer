@@ -1,0 +1,61 @@
+!!!
+html
+  head
+    title Brew Timer
+    link(rel="stylesheet", href="http://fonts.googleapis.com/css?family=Offside")
+    link(rel="stylesheet", href="styles/foundation.min.css")
+    link(rel="stylesheet", href="styles/main.min.css")
+    script(src="scripts/jquery.min.js")
+    script(src="scripts/foundation.min.js")
+    script(src="scripts/modernizr.foundation.js")
+    script(src="scripts/main.min.js")
+  body
+    audio#completed(preload="auto")
+      source(src="sounds/clinking.mp3", type="audio/mpeg")
+      source(src="sounds/clinking.wav", type="audio/wav")
+    audio#finished(preload="auto")
+      source(src="sounds/beep.mp3", type="audio/mpeg")
+      source(src="sounds/beep.wav", type="audio/wav")
+    #wrapper.block-grid
+      #header.row
+        .ten.columns.centered
+          h1 Brew Timer
+      #timers.row
+        #remaining.six.columns
+          .block-grid
+            h3.four.columns.offset-by-eight 00:00:00
+        #elapsed.six.columns
+            h3.four.column -00:00:00
+      #set-timer.row
+        .two.columns.offset-by-six
+          input#total(placeholder="Total Time (mins)", type="text")
+        .two.columns.end
+          button#set.button Start Timer
+      #stop-timer.row
+        .two.columns.offset-by-eight.end
+          button#stop.button Stop Timer
+      #add-step.row
+        .four.columns.offset-by-two
+          input#name(placeholder="Step Name", type="text")
+        .two.columns
+          input#time(placeholder="Alert At (mins)", type="text")
+        .two.columns.end
+          button#add.button Add Step
+      #steps.row
+        #list.block.grid
+          .header.row
+            .six.columns
+              h5.name Step Name
+            .two.columns.end
+              h5.at Alert At
+      #footer.row
+        .six.columns
+          ="Brought to you by: "
+          a(href="//www.brett.is", target="_blank") Brett Langdon
+        .six.columns
+          ="Sound Effects ("
+          a(href="//creativecommons.org/licenses/by/3.0/", target="_blank") Attribution 3.0
+          ="): "
+          a(href="//soundbible.com/1806-Censored-Beep.html", target="_blank") Censored Beep
+          =", "
+          a(href="//soundbible.com/1967-Clinking-Teaspoon.html", target="_blank") Clinking Teaspoon
