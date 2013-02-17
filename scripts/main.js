@@ -89,6 +89,12 @@ var add_step = function(){
     };
     if(!step.at){
 	alert('invalid number: ' + $('#add-step #time').val());
+	return false;
+    }
+
+    if(!step.name || step.name == ''){
+	alert('invalid name: ' + step.name);
+	return false;
     }
 
     step.at *= 60;
