@@ -1,3 +1,4 @@
+var warning_time = 60;
 var started = false;
 var update_timeout = null;
 var start_time = null;
@@ -11,6 +12,8 @@ $(document).ready(function(){
     $('#set').click(start_timer);
     $('#stop').click(stop_timer);
     $('#add').click(add_step);
+    $('#set-warning').click(set_warning);
+    $('#warning-time').val(round(warning_time / 60, 2))
 });
 
 var start_timer = function(){
@@ -126,7 +129,7 @@ var write_steps = function(){
 
 var remove_step = function(){
     var step = $(this).parent().parent()
-    var columns = step.children('columns');
+    var columns = step.children('.columns');
     var name = columns.children('.name').html();
     var at = parseFloat(columns.children('.at').html()) * 60;
 
@@ -158,8 +161,12 @@ var check_steps = function(time){
 	    $(this).addClass('completed');
 	    $(this).removeClass('current');
 	} else if(at == time){
+	    $(this).removeClass('warning');
 	    $(this).addClass('current');
 	    $('#completed').trigger('play');
+	} else if(warning_time && (at + warning_time) == time){
+	    $(this).addClass('warning');
+	    $('#warning').trigger('play');
 	} else{
 	    $(this).removeClass('current');
 	    $(this).removeClass('completed');
@@ -170,4 +177,9 @@ var check_steps = function(time){
 var round = function(num, num_places){
     num_places = Math.pow(10, num_places);
     return Math.round(num * num_places) / num_places;
+};
+
+
+var set_warning = function(){
+    warning_time = parseFloat($('#warning-time').val()) * 60;
 };
