@@ -1,4 +1,5 @@
 var warning_time = 60;
+var warning_enabled = true;
 var finished_audio = '#answering-machine';
 var warning_audio = '#beep';
 var completed_audio = '#clinking';
@@ -52,7 +53,7 @@ var update_timers = function(){
     if(remaining_time > 0){
 	update_timeout = setTimeout(update_timers, 1000);
     } else{
-	$(finished_audio).trigger('play');
+	play(finished_audio);
 	$('#set-timer').show();
 	$('#stop-timer').hide();
     }
@@ -166,10 +167,16 @@ var check_steps = function(time){
 	} else if(at == time){
 	    $(this).removeClass('warning');
 	    $(this).addClass('current');
-	    $(completed_audio).trigger('play');
-	} else if(warning_time && (at + warning_time) == time){
-	    $(this).addClass('warning');
-	    $(warning_audio).trigger('play');
+	    play(completed_audio)
+	} else if(warning_enabled && warning_time){
+	    if(time <= (at + warning_time) && time >= at){
+		if(!$(this).hasClass('warning')){
+		    $(this).addClass('warning');
+		    play(warning_audio);
+		}
+	    } else{
+		$(this).removeClass('warning');
+	    }
 	} else{
 	    $(this).removeClass('current');
 	    $(this).removeClass('completed');
@@ -185,6 +192,7 @@ var round = function(num, num_places){
 
 var save_settings = function(){
     warning_time = parseFloat($('#warning-time').val()) * 60;
+    warning_enabled = $('.switch #on').prop('checked');
     finished_audio = $('#finished-audio').val();
     completed_audio = $('#step-audio').val();
     warning_audio = $('#warning-audio').val();
@@ -195,6 +203,14 @@ var save_settings = function(){
 
 var open_settings = function(){
     $('#warning-time').val(round(warning_time / 60, 2));
+
+    if(warning_enabled){
+	$('.switch #on').prop('checked', true);
+	$('.switch #off').removeAttr('checked');
+    } else{
+	$('.switch #off').prop('checked', true);
+	$('.switch #on').removeAttr('checked');
+    }
 
     $('#settings #finished-audio').children('option').each(function(){
 	if($(this).val() == finished_audio){
@@ -220,3 +236,9 @@ var open_settings = function(){
 	}
     });
 };
+
+
+var play = function(id){
+    $(id).trigger('load');
+    $(id).trigger('play');
+}

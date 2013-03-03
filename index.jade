@@ -4,6 +4,7 @@ html
     title Brew Timer
     link(rel="stylesheet", href="http://fonts.googleapis.com/css?family=Offside")
     link(rel="stylesheet", href="styles/foundation.min.css")
+    link(rel="stylesheet", href="styles/foundation.select.min.css")
     link(rel="stylesheet", href="styles/general_foundicons.min.css")
     //if lt IE 8
       link(rel='styleheet", href="styles/general_foundicons_ie7.min.css")
@@ -81,6 +82,15 @@ html
               label.right(for="warning-time") Warning Time (mins)
             .five.columns.end
               input#warning-time(type="text")
+          .row
+            .six.columns
+              label.right(for="warning-enabled") Enable Warning
+            .five.columns.end
+              .switch.radius
+                input#off(type="radio", name="enable")
+                label(for="off") Off
+                input#on(type="radio", checked="true", name="enable")
+                label(for="on") On
           .row
             .six.columns
               label.right(for="finished-audio") Finished Audio
