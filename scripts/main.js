@@ -1,4 +1,7 @@
 var warning_time = 60;
+var finished_audio = '#answering-machine';
+var warning_audio = '#beep';
+var completed_audio = '#clinking';
 var started = false;
 var update_timeout = null;
 var start_time = null;
@@ -12,8 +15,8 @@ $(document).ready(function(){
     $('#set').click(start_timer);
     $('#stop').click(stop_timer);
     $('#add').click(add_step);
-    $('#set-warning').click(set_warning);
-    $('#warning-time').val(round(warning_time / 60, 2))
+    $('#open-settings').click(open_settings);
+    $('#settings #save').click(save_settings);
 });
 
 var start_timer = function(){
@@ -49,7 +52,7 @@ var update_timers = function(){
     if(remaining_time > 0){
 	update_timeout = setTimeout(update_timers, 1000);
     } else{
-	$('#finished').trigger('play');
+	$(finished_audio).trigger('play');
 	$('#set-timer').show();
 	$('#stop-timer').hide();
     }
@@ -163,10 +166,10 @@ var check_steps = function(time){
 	} else if(at == time){
 	    $(this).removeClass('warning');
 	    $(this).addClass('current');
-	    $('#completed').trigger('play');
+	    $(completed_audio).trigger('play');
 	} else if(warning_time && (at + warning_time) == time){
 	    $(this).addClass('warning');
-	    $('#warning').trigger('play');
+	    $(warning_audio).trigger('play');
 	} else{
 	    $(this).removeClass('current');
 	    $(this).removeClass('completed');
@@ -180,6 +183,40 @@ var round = function(num, num_places){
 };
 
 
-var set_warning = function(){
+var save_settings = function(){
     warning_time = parseFloat($('#warning-time').val()) * 60;
+    finished_audio = $('#finished-audio').val();
+    completed_audio = $('#step-audio').val();
+    warning_audio = $('#warning-audio').val();
+
+    $('#settings a.close-reveal-modal').click();
+};
+
+
+var open_settings = function(){
+    $('#warning-time').val(round(warning_time / 60, 2));
+
+    $('#settings #finished-audio').children('option').each(function(){
+	if($(this).val() == finished_audio){
+	    $(this).prop('selected', true);
+	} else{
+	    $(this).removeAttr('selected');
+	}
+    });
+
+    $('#settings #warning-audio').children('option').each(function(){
+	if($(this).val() == warning_audio){
+	    $(this).prop('selected', true);
+	} else{
+	    $(this).removeAttr('selected');
+	}
+    });
+
+    $('#settings #step-audio').children('option').each(function(){
+	if($(this).val() == completed_audio){
+	    $(this).prop('selected', true);
+	} else{
+	    $(this).removeAttr('selected');
+	}
+    });
 };

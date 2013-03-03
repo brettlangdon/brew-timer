@@ -4,25 +4,34 @@ html
     title Brew Timer
     link(rel="stylesheet", href="http://fonts.googleapis.com/css?family=Offside")
     link(rel="stylesheet", href="styles/foundation.min.css")
+    link(rel="stylesheet", href="styles/general_foundicons.min.css")
+    //if lt IE 8
+      link(rel='styleheet", href="styles/general_foundicons_ie7.min.css")
+
     link(rel="stylesheet", href="styles/main.min.css")
     script(src="scripts/jquery.min.js")
     script(src="scripts/foundation.min.js")
     script(src="scripts/modernizr.foundation.js")
     script(src="scripts/main.min.js")
   body
-    audio#completed(preload="auto")
+    audio#clinking(preload="auto")
       source(src="sounds/clinking.mp3", type="audio/mpeg")
       source(src="sounds/clinking.wav", type="audio/wav")
-    audio#warning(preload="auto")
+    audio#answering-machine(preload="auto")
       source(src="sounds/answering_machine.mp3", type="audio/mpeg")
       source(src="sounds/answering_machine.wav", type="audio/wav")
-    audio#finished(preload="auto")
+    audio#beep(preload="auto")
       source(src="sounds/beep.mp3", type="audio/mpeg")
       source(src="sounds/beep.wav", type="audio/wav")
     #wrapper.block-grid
       #header.row
         .ten.columns.centered
           h1 Brew Timer
+      #toolbar.row
+        .three.columns.offset-by-eight
+          a(href="#", data-reveal-id="settings")#open-settings.button
+            span.foundicon-settings
+            =" Settings"
       #timers.row
         #remaining.six.columns
           .block-grid
@@ -37,11 +46,6 @@ html
       #stop-timer.row
         .two.columns.offset-by-eight.end
           button#stop.button Stop Timer
-      #warning-row.row
-        .three.columns.offset-by-five
-          input#warning-time(placeholder="Warning Time (mins)", type="text")
-        .two.columns.end
-          button#set-warning.button Set Warning
       #add-step.row
         .four.columns.offset-by-two
           input#name(placeholder="Step Name", type="text")
@@ -70,6 +74,40 @@ html
           a(href="//soundbible.com/1967-Clinking-Teaspoon.html", target="_blank") Clinking Teaspoon
           =", "
           a(href="//soundbible.com/5-Answering-Machine-Beep.html", target="_blank") Answering Machine Beep
+      #settings.reveal-modal
+        .block-grid
+          .row
+            .six.columns
+              label.right(for="warning-time") Warning Time (mins)
+            .five.columns.end
+              input#warning-time(type="text")
+          .row
+            .six.columns
+              label.right(for="finished-audio") Finished Audio
+            .five.columns.end
+              select#finished-audio
+                option(value="#clinking") Clinking
+                option(value="#beep") Beep
+                option(value="#answering-machine") Answering machine
+          .row
+            .six.columns
+              label.right(for="warning-audio") Warning Audio
+            .five.columns.end
+              select#warning-audio
+                option(value="#clinking") Clinking
+                option(value="#beep") Beep
+                option(value="#answering-machine") Answering machine
+          .row
+            .six.columns
+              label.right(for="step-audio") Step Audio
+            .five.columns.end
+              select#step-audio
+                option(value="#clinking") Clinking
+                option(value="#beep") Beep
+                option(value="#answering-machine") Answering machine
+          .row
+            #save.two.columns.offset-by-ten.button.end Save
+        a.close-reveal-modal &#215;
     script(type="text/javascript")
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-34513423-2']);
