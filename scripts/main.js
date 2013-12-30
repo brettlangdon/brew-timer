@@ -12,6 +12,10 @@ var elapsed_time = null;
 var steps = [];
 
 
+$(window).bind("beforeunload", function(){
+    return "Leaving this page will destroy all timer progress and setup";
+});
+
 $(document).ready(function(){
     $('#set').click(start_timer);
     $('#stop').click(stop_timer);
