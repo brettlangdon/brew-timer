@@ -1,0 +1,26 @@
+{
+  "name": "brewtimer",
+  "version": "0.1.0",
+  "description": "A brew timer",
+  "main": "",
+  "dependencies": {
+    "clean-css": "~2.0.4",
+    "jade": "~1.0.1",
+    "uglify-js": "~2.4.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/brettlangdon/brewtimer.git"
+  },
+  "keywords": [
+    "brew",
+    "timer"
+  ],
+  "author": "Brett Langdon <brett@blangdon.com> (http://brett.is)",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
